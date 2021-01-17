@@ -1,36 +1,43 @@
 <template>
   <div class="hello">
+    <h2>Эффекты</h2>
+    <p>
+      <button @click="generatorEffects" class="btn btn-primary my-2">Новые эффекты</button>
+      <button @click="clear" class="btn btn-secondary my-2">Очистить эффекты</button>
+    </p>
+    <div class="container">
+      <h2>Положительные эффекты</h2>
+      <div class="row">
+        <div class="col-md-4" v-for="(h, index) in historyPositiveEffects" :key="index" >
+          <p class="alert alert-primary" role="alert" style=" text-align: center ">{{h}} </p>
+        </div>
+      </div>
+      <div class="w-100"></div>
+      <h2>Отрицательные эффекты</h2>
+      <div class="row">
+        <div  class="col-md-4" v-for="(h, index) in historyNegativeEffects" :key="index">
+          <p class="alert alert-danger" role="alert" style=" text-align: center ">{{h}} </p>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <h2>Боссы</h2>
+    <p>
+      <button @click="generatorEffectsForBoss" class="btn btn-primary my-2">Новые эффекты</button>
+      <button @click="clear" class="btn btn-secondary my-2">Очистить эффекты</button>
+    </p>
     <div class="container">
       <div class="row">
-        <div class="col-md-4" v-for="(image, imageId) in images" :key="imageId">
+        <div class="col-md-4" v-for="(effect, effectId) in effects" :key="effectId">
           <div class="card mb-4 box-shadow">
-            <img :src="image.image" class="card-img-top" >
+            <img :src="effect.get('image')" class="card-img-top" >
             <div class="card-body">
-              <p class="card-text" style="border: red"> </p>
+              <p class="alert alert-primary" role="alert">{{effect.get('positiveEffects')}} </p>
+              <p class="alert alert-danger" role="alert">{{effect.get('negativeEffects')}} </p>
             </div>
           </div>
         </div>
       </div>
-    </div>
-      <p>
-        <button @click="generatorEffects" class="btn btn-primary my-2">Новые эффекты</button>
-        <button @click="clear" class="btn btn-secondary my-2">Очистить эффекты</button>
-      </p>
-    <div class="container">
-          <h2>Положительные эффекты</h2>
-        <div class="row">
-          <div class="col-md-4" v-for="(h, index) in historyPositiveEffects" :key="index" >
-            <p class="alert alert-primary" role="alert" style=" text-align: center ">{{h}} </p>
-          </div>
-        </div>
-         <div class="w-100"></div>
-          <h2>Отрицательные эффекты</h2>
-        <div class="row">
-          <div  class="col-md-4" v-for="(h, index) in historyNegativeEffects" :key="index">
-            <p class="alert alert-danger" role="alert" style=" text-align: center ">{{h}} </p>
-          </div>
-        </div>
-
     </div>
   </div>
 </template>
@@ -235,26 +242,48 @@ export default {
           effectId: 22,
           effectText: 'Д4 вдохновления'
         }
-
-      ]
+      ],
+      effects: []
     }
   },
   methods: {
     generatorEffects () {
+      this.clear()
       const maxNegativeEffects = this.negativeEffects.length
       const maxPositiveEffects = this.positiveEffects.length
-      const min = 1
-      this.clear()
-      for (let index = 0; index < 3; index++) {
-        const numberNegativeEffect = Math.floor(Math.random() * (maxNegativeEffects - min + 1) + min)
+      const minRandomRate = 1
+      const countEffects = 3
+      for (let index = 0; index < countEffects; index++) {
+        const numberNegativeEffect = Math.floor(Math.random() * (maxNegativeEffects - minRandomRate + 1) + minRandomRate)
         this.historyNegativeEffects.push(this.negativeEffects[numberNegativeEffect].effectText)
-        const numberPositiveEffect = Math.floor(Math.random() * (maxPositiveEffects - min + 1) + min)
+        const numberPositiveEffect = Math.floor(Math.random() * (maxPositiveEffects - minRandomRate + 1) + minRandomRate)
         this.historyPositiveEffects.push(this.positiveEffects[numberPositiveEffect].effectText)
+      }
+    },
+    generatorEffectsForBoss () {
+      this.clear()
+      const maxNegativeEffects = this.negativeEffects.length
+      const maxPositiveEffects = this.positiveEffects.length
+      const minRandomRate = 1
+      const countEffects = 3
+      for (let index = 0; index < countEffects; index++) {
+        const effectDescription = new Map()
+        effectDescription.set('effectId', index)
+        const image = this.images[index].image
+        effectDescription.set('image', image)
+        const numberPositiveEffect = Math.floor(Math.random() * (maxPositiveEffects - minRandomRate + 1) + minRandomRate)
+        const positiveEffects = this.positiveEffects[numberPositiveEffect].effectText
+        effectDescription.set('positiveEffects', positiveEffects)
+        const numberNegativeEffect = Math.floor(Math.random() * (maxNegativeEffects - minRandomRate + 1) + minRandomRate)
+        const negativeEffects = this.negativeEffects[numberNegativeEffect].effectText
+        effectDescription.set('negativeEffects', negativeEffects)
+        this.effects.push(effectDescription)
       }
     },
     clear () {
       this.historyNegativeEffects = []
       this.historyPositiveEffects = []
+      this.effects = []
     }
   }
 }
