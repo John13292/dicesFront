@@ -1,17 +1,18 @@
 <template>
   <div class="home">
-    <h1>This is dices app</h1>
+    <Effects />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-// import Effects from '@/components/Effects.vue'
+import Effects from '@/components/Effects.vue'
 // import BossEffects from '@/components/BossEffects.vue'
 
 export default {
   name: 'Home',
   components: {
+    Effects
   }
 }
 </script>

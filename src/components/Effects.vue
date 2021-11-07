@@ -2,21 +2,33 @@
   <div>
     <button class="btn btn-primary my-1" @click="buttons">Эффекты</button>
     <div class="container" v-if="button">
-        <p>
-          <button @click="generatorEffects" class="btn btn-primary my-2">Новые эффекты</button>
-          <button @click="clear" class="btn btn-secondary my-2">Очистить эффекты</button>
-        </p>
-        <h2>Положительные эффекты</h2>
+      <div class="row justify-content-md-center">
+          <div class="col-auto">
+            <button @click="generatorEffects" class="btn btn-primary my-2">Новые эффекты</button>
+          </div>
+          <div class="col-auto">
+            <button @click="clear" class="btn btn-secondary my-2">Очистить эффекты</button>
+          </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-auto">
+          <h2>Положительные эффекты</h2>
+        </div>
+      </div>
         <div class="row">
           <div class="col-md-4" v-for="(h, index) in historyPositiveEffects" :key="index" >
-            <p class="alert alert-primary" role="alert" style=" text-align: center ">{{h}} </p>
+            <p class="alert alert-primary" role="alert" >{{h.effectText}} </p>
           </div>
         </div>
         <div class="w-100"></div>
-        <h2>Отрицательные эффекты</h2>
+      <div class="row justify-content-center">
+        <div class="col-auto">
+          <h2>Отрицательные эффекты</h2>
+        </div>
+      </div>
         <div class="row">
           <div  class="col-md-4" v-for="(h, index) in historyNegativeEffects" :key="index">
-            <p class="alert alert-danger" role="alert" style=" text-align: center ">{{h}} </p>
+            <p class="alert alert-danger" role="alert" >{{h.effectText}} </p>
           </div>
         </div>
     </div>
@@ -113,18 +125,14 @@ export default {
         },
         {
           effectId: 17,
-          effectText: 'Тараска'
-        },
-        {
-          effectId: 18,
           effectText: 'Ваше снаряжение лежит в центре арены (Надевается свободным действием)'
         },
         {
-          effectId: 19,
+          effectId: 18,
           effectText: 'Вожак'
         },
         {
-          effectId: 18,
+          effectId: 19,
           effectText: 'У врагов есть животные'
         }
       ],
@@ -234,12 +242,12 @@ export default {
       const maxNegativeEffects = this.negativeEffects.length
       const maxPositiveEffects = this.positiveEffects.length
       const minRandomRate = 1
-      const countEffects = 3
+      const countEffects = 3 // количество эффектов
       for (let index = 0; index < countEffects; index++) {
         const numberNegativeEffect = Math.floor(Math.random() * (maxNegativeEffects - minRandomRate + 1) + minRandomRate)
-        this.historyNegativeEffects.push(this.negativeEffects[numberNegativeEffect].effectText)
+        this.historyNegativeEffects.push(this.negativeEffects[numberNegativeEffect])
         const numberPositiveEffect = Math.floor(Math.random() * (maxPositiveEffects - minRandomRate + 1) + minRandomRate)
-        this.historyPositiveEffects.push(this.positiveEffects[numberPositiveEffect].effectText)
+        this.historyPositiveEffects.push(this.positiveEffects[numberPositiveEffect])
       }
     },
     clear () {
