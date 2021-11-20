@@ -4,7 +4,7 @@
     <div class="container" v-if="button">
       <div class="row justify-content-md-center">
           <div class="col-auto">
-            <button @click="generatorEffects" class="btn btn-primary my-2">Новые эффекты</button>
+            <button @click="GeneratorEffects" class="btn btn-primary my-2">Новые эффекты</button>
           </div>
           <div class="col-auto">
             <button @click="clear" class="btn btn-secondary my-2">Очистить эффекты</button>
@@ -38,9 +38,6 @@
         :positiveEffects="positiveEffects"
       />
     </div>
-    <div v-for="(h, index) in tests" :key="index">
-      <p>{{h}}</p>
-    </div>
   </div>
 </template>
 
@@ -51,6 +48,8 @@ export default {
   data () {
     return {
       button: true,
+      minRandomRate: 1,
+      countEffects: 3, // количество эффектов
       historyNegativeEffects: [],
       historyPositiveEffects: [],
       negativeEffects: [
@@ -229,14 +228,10 @@ export default {
           effectText: 'Д4 вдохновления'
         }
       ],
-      effects: [],
-      tests: []
+      effects: []
     }
   },
-  async mounted () {
-    const res = await fetch('https://localhost:44394/api/Effects')
-    this.tests = await res.json()
-  },
+
   methods: {
     buttons () {
       if (this.button) {
@@ -245,18 +240,30 @@ export default {
         this.button = true
       }
     },
-    generatorEffects () {
+    GeneratorEffects () {
       this.clear()
+
       const maxNegativeEffects = this.negativeEffects.length
       const maxPositiveEffects = this.positiveEffects.length
-      const minRandomRate = 1
-      const countEffects = 3 // количество эффектов
-      for (let index = 0; index < countEffects; index++) {
-        const numberNegativeEffect = Math.floor(Math.random() * (maxNegativeEffects - minRandomRate + 1) + minRandomRate)
-        this.historyNegativeEffects.push(this.negativeEffects[numberNegativeEffect])
-        const numberPositiveEffect = Math.floor(Math.random() * (maxPositiveEffects - minRandomRate + 1) + minRandomRate)
-        this.historyPositiveEffects.push(this.positiveEffects[numberPositiveEffect])
+
+      for (let index = 0; index < this.countEffects; index++) {
+        this.CalculeteNefateiveEffects(maxNegativeEffects)
+
+        this.CalculetePositiveEffects(maxPositiveEffects)
       }
+    },
+    CalculeteNefateiveEffects (maxNegativeEffects) {
+      const numberNegativeEffect = this.RandomGenerator(maxNegativeEffects)
+
+      this.historyNegativeEffects.push(this.negativeEffects[numberNegativeEffect])
+    },
+    CalculetePositiveEffects (maxPositiveEffects) {
+      const numberPositiveEffect = this.RandomGenerator(maxPositiveEffects)
+
+      this.historyPositiveEffects.push(this.positiveEffects[numberPositiveEffect])
+    },
+    RandomGenerator (maxEffects) {
+      return Math.floor(Math.random() * (maxEffects - this.minRandomRate + 1) + this.minRandomRate)
     },
     clear () {
       this.historyNegativeEffects = []
