@@ -38,6 +38,9 @@
         :positiveEffects="positiveEffects"
       />
     </div>
+    <div v-for="(h, index) in tests" :key="index">
+      <p>{{h}}</p>
+    </div>
   </div>
 </template>
 
@@ -226,8 +229,13 @@ export default {
           effectText: 'Д4 вдохновления'
         }
       ],
-      effects: []
+      effects: [],
+      tests: []
     }
+  },
+  async mounted () {
+    const res = await fetch('https://localhost:44394/api/Effects')
+    this.tests = await res.json()
   },
   methods: {
     buttons () {
