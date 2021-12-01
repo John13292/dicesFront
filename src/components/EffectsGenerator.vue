@@ -1,15 +1,10 @@
 <template>
   <div>
-    <div class="container" >
-      <div class="row justify-content-md-center">
-          <div class="col-auto">
-            <button @click="GeneratorEffects" class="btn btn-primary my-2">Новые эффекты</button>
-          </div>
-          <div class="col-auto">
-            <button @click="clear" class="btn btn-secondary my-2">Очистить эффекты</button>
-          </div>
-      </div>
-    </div>
+    <effect-button
+      @generator-effects='GeneratorEffects'
+      @clear='Clear'
+      >
+    </effect-button>
     <div class="row justify-content-center">
       <div class="input-group-center">
         <div class="input-group-text-center">
@@ -38,6 +33,7 @@
 
 <script>
 import BossEffects from './BossEffects.vue'
+import EffectButton from './EffectButton.vue'
 import Effects from './Effects.vue'
 
 export default {
@@ -68,16 +64,16 @@ export default {
   },
   computed: {
     maxNegativeEffects () {
-      return this.negativeEffects.length
+      return this.negativeEffects.length - 1
     },
 
     maxPositiveEffects () {
-      return this.positiveEffects.length
+      return this.positiveEffects.length - 1
     }
   },
   methods: {
     GeneratorEffects () {
-      this.clear()
+      this.Clear()
 
       for (let index = 0; index < this.countEffects; index++) {
         this.CalculeteNefateiveEffects(this.maxNegativeEffects)
@@ -109,7 +105,7 @@ export default {
       )
     },
 
-    clear () {
+    Clear () {
       this.historyNegativeEffects = []
       this.historyPositiveEffects = []
       this.effects = []
@@ -117,7 +113,8 @@ export default {
   },
   components: {
     BossEffects,
-    Effects
+    Effects,
+    EffectButton
   }
 }
 </script>

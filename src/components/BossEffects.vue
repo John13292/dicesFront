@@ -13,9 +13,9 @@
           v-for="(h, index) in historyPositiveEffects"
           :key="index"
         >
-          <effects-generator-item class="alert alert-primary" role="alert"
+          <effects-item class="alert alert-primary" role="alert"
             :Effects="h.effectText">
-          </effects-generator-item>
+          </effects-item>
         </div>
     </div>
         <div class="w-100"></div>
@@ -30,10 +30,10 @@
         v-for="(h, index) in historyNegativeEffects"
         :key="index"
       >
-        <effects-generator-item class="alert alert-danger" role="alert"
+        <effects-item class="alert alert-danger" role="alert"
           :Effects="h.effectText"
         >
-        </effects-generator-item>
+        </effects-item>
       </div>
     </div>
     </div>
@@ -42,12 +42,12 @@
 
 <script>
 import BossEffectsImage from './BossEffectsImage.vue'
-import EffectsGeneratorItem from './EffectsGeneratorItem.vue'
+import EffectsItem from './EffectsItem.vue'
 
 export default {
   components: {
     BossEffectsImage,
-    EffectsGeneratorItem
+    EffectsItem
   },
   props: {
     historyNegativeEffects: {

@@ -1,18 +1,12 @@
 <template>
-  <div class="editEffects">
-    <div class="" v-for="(effect, id) in effects" :key="id">
-      {{effect}}
-    </div>
+  <div>
+    <effects-provider-2></effects-provider-2>
   </div>
 </template>
 
 <script>
+import EffectsProvider2 from '../components/EffectsProvider2.vue'
 export default {
-  props: {
-    effects: {
-      id: Number,
-      text: String
-    }
-  }
+  components: { EffectsProvider2 }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div>
     <effects-provider></effects-provider>
   </div>
 </template>

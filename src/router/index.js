@@ -11,9 +11,9 @@ const routes = [
     component: Home
   },
   {
-    path: '/effects',
-    name: 'Effects',
-    component: () => import('../views/Effects.vue')
+    path: '/ShowEffects',
+    name: 'ShowEffects',
+    component: () => import('../views/ShowEffects.vue')
   },
   {
     path: '/EditEffects',
