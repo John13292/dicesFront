@@ -64,11 +64,11 @@ export default {
   },
   computed: {
     maxNegativeEffects () {
-      return this.negativeEffects.length - 1
+      return this.negativeEffects.length
     },
 
     maxPositiveEffects () {
-      return this.positiveEffects.length - 1
+      return this.positiveEffects.length
     }
   },
   methods: {
@@ -100,7 +100,7 @@ export default {
 
     RandomGenerator (maxEffects) {
       return Math.floor(
-        Math.random() * (maxEffects - this.minRandomRate + 1) +
+        Math.random() * (maxEffects - this.minRandomRate) +
           this.minRandomRate
       )
     },
