@@ -1,6 +1,6 @@
 <template>
   <div>
-    <li> <strong>{{index + 1}} </strong>{{Effect}}</li>
+    <li> <strong>{{index + 1}}: </strong>{{Effect}}</li>
   </div>
 </template>
 

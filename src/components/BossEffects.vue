@@ -14,7 +14,7 @@
           :key="index"
         >
           <effects-item class="alert alert-primary" role="alert"
-            :Effects="h.effectText">
+            :Effects="h.name">
           </effects-item>
         </div>
     </div>
@@ -31,7 +31,7 @@
         :key="index"
       >
         <effects-item class="alert alert-danger" role="alert"
-          :Effects="h.effectText"
+          :Effects="h.name"
         >
         </effects-item>
       </div>
