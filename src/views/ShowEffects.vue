@@ -1,16 +1,16 @@
 <template>
   <div>
-    <effects-provider></effects-provider>
+    <effects-generator-provider></effects-generator-provider>
   </div>
 </template>
 
 <script>
-import EffectsProvider from '../components/EffectsProvider.vue'
+import EffectsGeneratorProvider from '../components/EffectGenerator/EffectsGeneratorProvider.vue'
 
 export default {
   name: 'Home',
   components: {
-    EffectsProvider
+    EffectsGeneratorProvider
   }
 }
 </script>

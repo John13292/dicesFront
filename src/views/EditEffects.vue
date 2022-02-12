@@ -1,12 +1,14 @@
 <template>
   <div>
-    <effects-provider-2></effects-provider-2>
+    <effects-editing-provider></effects-editing-provider>
   </div>
 </template>
 
 <script>
-import EffectsProvider2 from '../components/EffectsProvider2.vue'
+
+import EffectsEditingProvider from '../components/EffectEditing/EffectsEditingProvider.vue'
+
 export default {
-  components: { EffectsProvider2 }
+  components: { EffectsEditingProvider }
 }
 </script>
