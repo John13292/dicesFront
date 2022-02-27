@@ -35,6 +35,7 @@
 import BossEffects from './BossEffects.vue'
 import EffectButton from './EffectButton.vue'
 import Effects from './Effects.vue'
+//
 
 export default {
   props: {
